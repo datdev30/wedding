@@ -109,6 +109,60 @@ body {
   object-position: center;
 }
 
+/* Web: thiệp dọc — căn giữa, contain theo tỉ lệ 397×559 (mobile <768px giữ nguyên) */
+@media (min-width: 768px) {
+  .splash,
+  .bridge {
+    --invite-card-w: min(420px, calc(100vw - 48px));
+    --invite-card-h: min(92dvh, calc(var(--invite-card-w) * 559 / 397));
+  }
+
+  .splash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .splash__open {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    max-width: var(--invite-card-w);
+    max-height: var(--invite-card-h);
+    border-radius: 4px;
+  }
+
+  .splash__open img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--invite-card-h);
+    min-width: 0;
+    min-height: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .bridge__stage {
+    width: auto;
+    height: auto;
+    max-width: var(--invite-card-w);
+    max-height: var(--invite-card-h);
+  }
+
+  .bridge__art {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--invite-card-h);
+    min-width: 0;
+    min-height: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
 #music-toggle.music-toggle {
   position: fixed;
   right: max(16px, env(safe-area-inset-right, 0px));
@@ -242,17 +296,32 @@ body {
 .deck--main {
   margin: 0;
   padding: 0;
-  max-width: none;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background: var(--bg);
 }
 
 .ladipage-embed {
   display: block;
   width: 100%;
+  max-width: min(100%, 420px);
   min-height: 100vh;
+  min-height: 100dvh;
   height: 100vh;
+  height: 100dvh;
   border: 0;
   vertical-align: top;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .ladipage-embed {
+    max-width: min(100%, 960px);
+  }
 }
 
