@@ -1,0 +1,276 @@
+/* Mừng cưới — QR ngân hàng (public/bank) + nút tải / sao chép STK */
+
+.bank-qr-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  padding-top: 4px;
+}
+
+.bank-qr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-family: "Baloo Bhaina 2", cursive, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease,
+    background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bank-qr-btn--download {
+  background: rgba(150, 46, 56, 0.1);
+  color: rgb(108, 32, 44);
+  border: 2px solid rgb(150, 46, 56);
+}
+
+.bank-qr-btn--download:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.bank-qr-btn--copy {
+  background: linear-gradient(
+    145deg,
+    rgb(168, 52, 62) 0%,
+    rgb(150, 46, 56) 40%,
+    rgb(108, 32, 44) 100%
+  );
+  color: #fffdf9;
+  box-shadow: 0 3px 0 rgba(72, 22, 30, 0.3),
+    0 8px 20px rgba(150, 46, 56, 0.22);
+}
+
+.bank-qr-btn--copy:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.bank-qr-btn:active {
+  transform: translateY(1px);
+}
+
+.bank-qr-btn:focus-visible {
+  outline: 2px solid rgb(150, 46, 56);
+  outline-offset: 2px;
+}
+
+.bank-qr-btn--copy:focus-visible {
+  outline-color: #fffdf9;
+}
+
+.bank-qr-stk {
+  font-family: Rokkitt, Georgia, serif;
+  font-size: 0.92em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgb(60, 50, 45);
+}
+
+/* Ô QR: <img> object-fit để không cắt góc; nút phủ toàn ô để bấm zoom */
+#IMAGE42.bank-qr-tile,
+#IMAGE43.bank-qr-tile {
+  overflow: visible !important;
+}
+
+.bank-qr-tile__btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgb(225, 225, 225);
+  border-radius: 8px;
+  background: #fffdf9;
+  cursor: zoom-in;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bank-qr-tile__btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 28px rgba(45, 35, 30, 0.15);
+}
+
+.bank-qr-tile__btn:focus-visible {
+  outline: 3px solid rgb(150, 46, 56);
+  outline-offset: 2px;
+}
+
+.bank-qr-tile__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  vertical-align: middle;
+}
+
+/* Lightbox toàn màn */
+.bank-qr-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s;
+}
+
+.bank-qr-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.bank-qr-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 10, 9, 0.94);
+  cursor: pointer;
+}
+
+.bank-qr-lightbox__stage {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bank-qr-lightbox__img {
+  display: block;
+  max-width: min(96vw, 92vh);
+  max-height: min(92vh, 96vw);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+}
+
+.bank-qr-lightbox__close {
+  position: absolute;
+  z-index: 2;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  line-height: 1;
+  color: #fffdf9;
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.bank-qr-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.bank-qr-lightbox__close:focus-visible {
+  outline: 2px solid #fffdf9;
+  outline-offset: 2px;
+}
+
+body.bank-qr-lightbox-open {
+  overflow: hidden !important;
+}
+
+@media (min-width: 768px) {
+  /* Không dùng height:auto trên section — toàn bộ .ladi-element là absolute,
+     auto làm section co hết, nội dung tràn ra ngoài .ladi-wraper (overflow:hidden)
+     và không thể cuộn xuống. Chỉ cần overflow:visible + chiều cao trong index.html. */
+  #SECTION8 {
+    padding-bottom: 48px;
+    box-sizing: border-box;
+    overflow: visible !important;
+  }
+
+  #SECTION8 > .ladi-container {
+    overflow: visible !important;
+  }
+
+  #GROUP39 {
+    overflow: visible !important;
+  }
+
+  #GROUP39 > .ladi-group {
+    overflow: visible !important;
+  }
+
+  #GROUP_QR_STK {
+    overflow: visible !important;
+  }
+
+  #COL_QR_CHURE,
+  #COL_QR_CODAU {
+    overflow: visible !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .bank-qr-actions {
+    max-width: 200px;
+  }
+
+  .bank-qr-btn {
+    font-size: 13px;
+    min-height: 40px;
+  }
+
+  #SECTION8 {
+    padding-bottom: 40px;
+    box-sizing: border-box;
+    overflow: visible !important;
+  }
+
+  #SECTION8 > .ladi-container {
+    overflow: visible !important;
+  }
+
+  #GROUP39 {
+    overflow: visible !important;
+  }
+
+  #GROUP39 > .ladi-group {
+    overflow: visible !important;
+  }
+
+  #GROUP_QR_STK {
+    overflow: visible !important;
+  }
+
+  #COL_QR_CHURE,
+  #COL_QR_CODAU {
+    overflow: visible !important;
+  }
+}

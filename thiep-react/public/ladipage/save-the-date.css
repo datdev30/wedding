@@ -1,0 +1,82 @@
+/* Gỡ ảnh nền CDN — thay bằng /save-the-date/ (save-the-date.js) */
+#IMAGE6 > .ladi-image > .ladi-image-background,
+#IMAGE7 > .ladi-image > .ladi-image-background,
+#IMAGE8 > .ladi-image > .ladi-image-background,
+#IMAGE9 > .ladi-image > .ladi-image-background {
+  background-image: none !important;
+}
+
+/* Click để phóng to (Ladi animation đặt pointer-events: none trên #GROUP4/#GROUP5) */
+#IMAGE6.save-the-date-photo--zoomable,
+#IMAGE7.save-the-date-photo--zoomable,
+#IMAGE8.save-the-date-photo--zoomable,
+#IMAGE9.save-the-date-photo--zoomable {
+  cursor: zoom-in;
+  pointer-events: auto !important;
+}
+
+#save-the-date-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top, 12px) 12px env(safe-area-inset-bottom, 12px);
+  box-sizing: border-box;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+
+#save-the-date-lightbox.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+#save-the-date-lightbox .std-lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+}
+
+#save-the-date-lightbox .std-lb-close {
+  position: absolute;
+  top: max(8px, env(safe-area-inset-top, 0px));
+  right: max(8px, env(safe-area-inset-right, 0px));
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#save-the-date-lightbox .std-lb-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+#save-the-date-lightbox .std-lb-img {
+  position: relative;
+  z-index: 1;
+  max-width: min(96vw, 100%);
+  max-height: min(92vh, 100%);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: default;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+}

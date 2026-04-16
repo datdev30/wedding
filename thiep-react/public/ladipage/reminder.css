@@ -1,0 +1,180 @@
+/* Reminder — thẻ SVG (public/reminder/reminder.svg), tiêu đề giống Album cưới */
+
+#SECTION_REMINDER.reminder-section-dynamic {
+  height: auto !important;
+  min-height: 0;
+  padding-bottom: 40px;
+  overflow: visible;
+}
+
+#SECTION_REMINDER.reminder-section-dynamic > .ladi-section-background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+}
+
+#SECTION_REMINDER.reminder-section-dynamic > .ladi-container {
+  height: auto !important;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding-top: 20px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+#SECTION_REMINDER.reminder-section-dynamic #HEADLINE_REMINDER {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  margin: 0;
+}
+
+#SECTION_REMINDER.reminder-section-dynamic #HEADLINE_REMINDER > .ladi-headline {
+  text-align: center;
+}
+
+#GROUP_REMINDER_SVG.reminder-svg-host {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+#GROUP_REMINDER_SVG.reminder-svg-host > .ladi-group {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+/*
+ * Khung SVG + nút Maps đè lên (theo % khung ảnh, co giãn theo width thẻ).
+ * Chỉnh vị trí: đổi % dưới đây (hoặc ghi đè trong DevTools lên .reminder-svg-stack).
+ */
+.reminder-svg-stack {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  /* Nút giữa thẻ (trục theo khung SVG) */
+  --r-maps-mid-top: 46%;
+  --r-maps-mid-left: 50%;
+  /* Nút sát đáy thẻ (đè lên nội dung SVG) — % nhỏ hơn = nút xuống thấp hơn */
+  --r-maps-bottom-bottom: 4%;
+  --r-maps-bottom-left: 50%;
+}
+
+.reminder-svg-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+  position: relative;
+  z-index: 0;
+}
+
+.reminder-maps-btn {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  max-width: min(92%, 320px);
+  background: linear-gradient(
+    145deg,
+    rgb(168, 52, 62) 0%,
+    rgb(150, 46, 56) 40%,
+    rgb(108, 32, 44) 100%
+  );
+  color: #ffffff;
+  font-family: "Baloo Bhaina 2", cursive, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 0 4px 0 rgba(72, 22, 30, 0.35),
+    0 10px 24px rgba(45, 35, 30, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reminder-maps-btn:hover {
+  transform: var(--r-maps-btn-hover-transform, translate(-50%, -50%))
+    translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 5px 0 rgba(72, 22, 30, 0.32),
+    0 14px 32px rgba(150, 46, 56, 0.35);
+}
+
+.reminder-maps-btn:active {
+  transform: var(--r-maps-btn-hover-transform, translate(-50%, -50%))
+    translateY(1px);
+  box-shadow: 0 2px 0 rgba(72, 22, 30, 0.35),
+    0 6px 16px rgba(150, 46, 56, 0.22);
+}
+
+.reminder-maps-btn--mid {
+  top: var(--r-maps-mid-top);
+  left: var(--r-maps-mid-left);
+  transform: translate(-50%, -50%);
+  --r-maps-btn-hover-transform: translate(-50%, -50%);
+}
+
+.reminder-maps-btn--bottom {
+  bottom: var(--r-maps-bottom-bottom);
+  left: var(--r-maps-bottom-left);
+  transform: translateX(-50%);
+  --r-maps-btn-hover-transform: translateX(-50%);
+}
+
+.reminder-maps-btn:focus-visible {
+  outline: 2px solid rgb(255, 248, 240);
+  outline-offset: 3px;
+}
+
+.reminder-maps-btn__pin {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  background: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z'/%3E%3C/svg%3E");
+}
+
+.reminder-maps-btn__label {
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 767px) {
+  .reminder-maps-btn {
+    font-size: 13px;
+    padding: 9px 14px;
+    gap: 6px;
+    max-width: min(94%, 280px);
+  }
+}

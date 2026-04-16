@@ -1,0 +1,9 @@
+# Dependencies & build (Vite/React)
+thiep-react/node_modules/
+thiep-react/dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+*.log

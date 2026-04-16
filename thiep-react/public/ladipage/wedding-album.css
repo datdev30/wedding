@@ -1,0 +1,378 @@
+/* Album cưới — chỉ ảnh từ /wedding-album/ + lightbox */
+
+/*
+ * LadiPage: mọi .ladi-element là position:absolute → không tạo chiều cao section.
+ * Khi grid dài ra, nội dung tràn và đè section phía dưới. Ta chuyển block album
+ * sang flow (relative) + flex trong container để SECTION5 giãn theo nội dung.
+ */
+#SECTION5.wedding-album-dynamic {
+  height: auto !important;
+  min-height: 0;
+  padding-bottom: 56px;
+  overflow: visible;
+}
+
+#SECTION5.wedding-album-dynamic > .ladi-section-background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+}
+
+#SECTION5.wedding-album-dynamic > .ladi-container {
+  height: auto !important;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding-top: 20px;
+  padding-bottom: 4px;
+  box-sizing: border-box;
+}
+
+#SECTION5.wedding-album-dynamic #HEADLINE23 {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  margin: 0;
+}
+
+#SECTION5.wedding-album-dynamic #HEADLINE23 > .ladi-headline {
+  text-align: center;
+}
+
+#GROUP36.wedding-album-host {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+#GROUP36.wedding-album-host > .ladi-group {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0;
+}
+
+.wedding-album-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 4px;
+}
+
+@media (max-width: 767px) {
+  .wedding-album-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 0 2px;
+  }
+}
+
+.wedding-album-card {
+  position: relative;
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: zoom-in;
+  box-shadow: 0 8px 32px rgba(45, 35, 30, 0.12);
+  background: linear-gradient(145deg, #faf7f2 0%, #efe8df 100%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.wedding-album-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.wedding-album-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(45, 35, 30, 0.18);
+}
+
+.wedding-album-card:focus-visible {
+  outline: 2px solid rgb(150, 46, 56);
+  outline-offset: 3px;
+}
+
+.wedding-album-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  vertical-align: middle;
+}
+
+.wedding-album-more-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 24px 16px 12px;
+  margin-top: 8px;
+  box-sizing: border-box;
+}
+
+.wedding-album-empty {
+  text-align: center;
+  font-family: Rokkitt, Georgia, serif;
+  font-size: 16px;
+  color: rgba(60, 50, 45, 0.75);
+  padding: 32px 16px;
+  margin: 0;
+}
+
+.wedding-album-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 280px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    145deg,
+    rgb(168, 52, 62) 0%,
+    rgb(150, 46, 56) 40%,
+    rgb(108, 32, 44) 100%
+  );
+  color: #fffdf9;
+  font-family: "Baloo Bhaina 2", cursive, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(72, 22, 30, 0.35), 0 10px 28px rgba(150, 46, 56, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease,
+    opacity 0.2s;
+}
+
+.wedding-album-more-btn__text {
+  line-height: 1.2;
+}
+
+.wedding-album-more-btn__chevron {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.92;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wedding-album-more-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 5px 0 rgba(72, 22, 30, 0.32), 0 14px 36px rgba(150, 46, 56, 0.35);
+}
+
+.wedding-album-more-btn:hover:not(:disabled) .wedding-album-more-btn__chevron {
+  transform: translateY(3px);
+}
+
+.wedding-album-more-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 rgba(72, 22, 30, 0.35), 0 6px 18px rgba(150, 46, 56, 0.22);
+}
+
+.wedding-album-more-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 767px) {
+  .wedding-album-more-btn {
+    max-width: none;
+    padding: 15px 24px;
+    font-size: 15px;
+  }
+}
+
+/* Ẩn popup gallery cũ */
+#POPUP2.ladi-element {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* --- Lightbox --- */
+.walb {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.walb.walb--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.walb__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 10, 9, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.walb__frame {
+  position: relative;
+  z-index: 1;
+  max-width: min(96vw, 1400px);
+  max-height: 92vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.walb__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 4px 16px;
+  box-sizing: border-box;
+}
+
+.walb__brand {
+  font-family: "Baloo Bhaina 2", cursive, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 240, 0.55);
+}
+
+.walb__counter {
+  font-family: Rokkitt, Georgia, serif;
+  font-size: 15px;
+  color: rgba(255, 250, 245, 0.92);
+  font-variant-numeric: tabular-nums;
+}
+
+.walb__close {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.walb__close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.walb__stage-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.walb__img {
+  max-width: 100%;
+  max-height: calc(92vh - 140px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.walb.walb--open .walb__img.walb__img--ready {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.walb__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.walb__nav:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.walb__nav:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.walb__nav--prev {
+  left: 8px;
+}
+
+.walb__nav--next {
+  right: 8px;
+}
+
+@media (max-width: 767px) {
+  .walb__nav {
+    width: 44px;
+    height: 44px;
+  }
+  .walb__nav--prev {
+    left: 4px;
+  }
+  .walb__nav--next {
+    right: 4px;
+  }
+}
+
+body.walb-no-scroll {
+  overflow: hidden !important;
+}

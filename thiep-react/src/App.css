@@ -1,0 +1,258 @@
+:root {
+  --bg: #f7f3ed;
+  --paper: #fffdfa;
+  --ink: #3d3429;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* --- Splash (1.svg) --- */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+
+.splash__open {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: var(--bg);
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.splash__open:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -4px;
+}
+
+.splash__open:disabled {
+  cursor: wait;
+  opacity: 0.99;
+}
+
+.splash__open img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* --- Bridge (2.svg): zoom trên .bridge__stage --- */
+.bridge {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.bridge__stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.88);
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+.bridge__stage--play {
+  animation: bridgeZoomIn var(--bridge-dur, 3s) ease-out forwards;
+}
+
+@keyframes bridgeZoomIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+.bridge__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#music-toggle.music-toggle {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  left: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid rgba(61, 52, 41, 0.12);
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  background: linear-gradient(160deg, #fffefa 0%, #f3e8dc 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 6px 24px rgba(61, 52, 41, 0.14),
+    0 2px 6px rgba(61, 52, 41, 0.08);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    border-color 0.2s ease;
+}
+
+#music-toggle.music-toggle:hover {
+  transform: scale(1.04);
+  border-color: rgba(61, 52, 41, 0.18);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 28px rgba(61, 52, 41, 0.16),
+    0 2px 8px rgba(61, 52, 41, 0.1);
+}
+
+#music-toggle.music-toggle:active {
+  transform: scale(0.97);
+}
+
+#music-toggle.music-toggle:focus-visible {
+  outline: 2px solid rgba(139, 107, 74, 0.55);
+  outline-offset: 3px;
+}
+
+.music-toggle__ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  pointer-events: none;
+}
+
+.music-toggle--playing .music-toggle__ring {
+  border-color: rgba(180, 140, 95, 0.35);
+  animation: musicRingPulse 2.2s ease-in-out infinite;
+}
+
+.music-toggle__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.music-toggle__svg {
+  display: block;
+  opacity: 0.92;
+}
+
+.music-toggle__svg--muted {
+  opacity: 0.55;
+}
+
+.music-toggle--playing .music-toggle__svg {
+  opacity: 1;
+}
+
+.music-toggle__wave {
+  transform-origin: 11px 12px;
+}
+
+.music-toggle--playing .music-toggle__wave--a {
+  animation: musicWaveA 1.1s ease-in-out infinite;
+}
+
+.music-toggle--playing .music-toggle__wave--b {
+  animation: musicWaveB 1.1s ease-in-out infinite;
+}
+
+@keyframes musicRingPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes musicWaveA {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes musicWaveB {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleX(0.88);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scaleX(1);
+  }
+}
+
+/* --- Nội dung chính: iframe = file HTML y hệt template1/index.html --- */
+.deck--main {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.ladipage-embed {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  border: 0;
+  vertical-align: top;
+}
+

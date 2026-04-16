@@ -1,0 +1,97 @@
+/* Cảm ơn — SVG cuối trang (public/thanks/thankyou.svg), dưới section Mừng cưới */
+
+#SECTION_THANKYOU.thankyou-section-dynamic {
+  height: auto !important;
+  min-height: 0;
+  padding-bottom: 32px;
+  overflow: visible;
+}
+
+#SECTION_THANKYOU.thankyou-section-dynamic > .ladi-section-background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+}
+
+#SECTION_THANKYOU.thankyou-section-dynamic > .ladi-container {
+  height: auto !important;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+#GROUP_THANKYOU_SVG.thankyou-svg-host {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+#GROUP_THANKYOU_SVG.thankyou-svg-host > .ladi-group {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.thankyou-svg-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.thankyou-svg-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* Mobile: ảnh cảm ơn tràn cạnh màn hình (thoát khung 420px của .ladi-container) */
+@media (max-width: 767px) {
+  #SECTION_THANKYOU.thankyou-section-dynamic {
+    width: 100%;
+    max-width: none;
+    padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+    overflow-x: visible;
+  }
+
+  #SECTION_THANKYOU.thankyou-section-dynamic > .ladi-container {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
+
+  #GROUP_THANKYOU_SVG.thankyou-svg-host > .ladi-group {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .thankyou-svg-wrap {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .thankyou-svg-img {
+    width: 100%;
+    max-width: none;
+  }
+}
