@@ -5,18 +5,13 @@ import { defineConfig } from "vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/** Thư mục chứa 1.svg … 8.svg (cùng cấp với thiep-react) */
-const thiepDir = path.resolve(__dirname, "../Thiệp cưới");
+/** SVG splash / bridge — nằm trong repo (deploy Vercel chỉ thư mục thiep-react) */
+const thiepDir = path.resolve(__dirname, "src/assets/thiep");
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
       "@thiep": thiepDir,
-    },
-  },
-  server: {
-    fs: {
-      allow: [path.resolve(__dirname, "..")],
     },
   },
 });

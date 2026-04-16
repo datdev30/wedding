@@ -12,7 +12,7 @@ import "./App.css";
 
 type Phase = "splash" | "bridge" | "main";
 
-/** Nhạc tĩnh: đặt file `public/wedding-song.mp3` (hoặc copy từ `template5/wedding-song.mp3`). */
+/** Nhạc nền: `public/wedding-song.mp3` */
 const WEDDING_SONG_SRC = "/wedding-song.mp3";
 
 function prefetchImage(src: string): Promise<void> {
